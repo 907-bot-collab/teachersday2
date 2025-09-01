@@ -101,7 +101,7 @@
             height: 100%;
         }
 
-        /* Login form styles */
+        /* Login form container - now single column layout */
         .login-container {
             position: absolute;
             top: 50%;
@@ -111,78 +111,9 @@
             width: 400px;
             max-width: 90vw;
             display: flex;
-            gap: 30px;
-            align-items: flex-start;
-        }
-
-        .credentials-panel {
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            width: 300px;
-            max-height: 500px;
-            overflow-y: auto;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .credentials-panel h3 {
-            color: #00f8f1;
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            text-align: center;
-            border-bottom: 1px solid rgba(0, 248, 241, 0.3);
-            padding-bottom: 10px;
-        }
-
-        .credential-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 8px;
-            padding: 8px 12px;
-            margin-bottom: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .credential-item:hover {
-            background: rgba(169, 0, 255, 0.1);
-            border-color: rgba(169, 0, 255, 0.3);
-            transform: translateX(5px);
-        }
-
-        .credential-item .username {
-            color: #ffffff;
-            font-size: 12px;
-            font-weight: 500;
-            display: block;
-        }
-
-        .credential-item .password {
-            color: #a0a0a0;
-            font-size: 11px;
-            font-family: 'Martian Mono', monospace;
-            margin-top: 2px;
-        }
-
-        /* Scrollbar styling */
-        .credentials-panel::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .credentials-panel::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
-        }
-
-        .credentials-panel::-webkit-scrollbar-thumb {
-            background: rgba(0, 248, 241, 0.5);
-            border-radius: 2px;
-        }
-
-        .credentials-panel::-webkit-scrollbar-thumb:hover {
-            background: rgba(0, 248, 241, 0.7);
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
         }
 
         .login-form {
@@ -195,6 +126,7 @@
                 0 20px 50px rgba(0, 0, 0, 0.3),
                 0 0 100px rgba(169, 0, 255, 0.1);
             animation: formGlow 3s ease-in-out infinite alternate;
+            width: 100%;
         }
 
         @keyframes formGlow {
@@ -261,8 +193,6 @@
             color: #666;
         }
 
-
-
         .login-btn {
             width: 100%;
             padding: 15px;
@@ -274,7 +204,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-bottom: 25px;
+            margin-bottom: 0;
             position: relative;
             overflow: hidden;
         }
@@ -288,53 +218,97 @@
             transform: translateY(0);
         }
 
+        /* Credentials panel - now positioned below the form */
+        .credentials-panel {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            width: 100%;
+            max-height: 400px;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
 
+        .credentials-panel h3 {
+            color: #00f8f1;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 248, 241, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .credential-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .credential-item:hover {
+            background: rgba(169, 0, 255, 0.1);
+            border-color: rgba(169, 0, 255, 0.3);
+            transform: translateX(5px);
+        }
+
+        .credential-item .username {
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 500;
+            display: block;
+        }
+
+        .credential-item .password {
+            color: #a0a0a0;
+            font-size: 11px;
+            font-family: 'Martian Mono', monospace;
+            margin-top: 2px;
+        }
+
+        /* Scrollbar styling */
+        .credentials-panel::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .credentials-panel::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+        }
+
+        .credentials-panel::-webkit-scrollbar-thumb {
+            background: rgba(0, 248, 241, 0.5);
+            border-radius: 2px;
+        }
+
+        .credentials-panel::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 248, 241, 0.7);
+        }
 
         /* Responsive */
         @media (max-width: 480px) {
             .login-container {
-                flex-direction: column;
-                align-items: center;
                 max-width: 95vw;
-                gap: 20px;
-            }
-
-            .credentials-panel {
-                width: 100%;
-                max-width: 350px;
-                max-height: 200px;
-                order: 2;
+                gap: 15px;
             }
 
             .login-form {
                 padding: 30px 25px;
-                margin: 0;
                 width: 100%;
-                max-width: 350px;
-                order: 1;
+            }
+
+            .credentials-panel {
+                max-height: 250px;
+                padding: 15px;
             }
 
             .logo h1 {
                 font-size: 24px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .login-container {
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-            }
-
-            .credentials-panel {
-                width: 100%;
-                max-width: 400px;
-                order: 2;
-            }
-
-            .login-form {
-                width: 100%;
-                order: 1;
             }
         }
 
@@ -354,9 +328,43 @@
         <div class="overlay"></div>
     </a-hole>
 
-    <!-- Login Form -->
+    <!-- Login Container -->
     <div class="login-container">
-        <!-- Credentials Panel -->
+        <!-- Login Form -->
+        <div class="login-form">
+            <div class="logo">
+                <h1>Portal</h1>
+                <p>Enter the digital dimension</p>
+            </div>
+
+            <form id="loginForm">
+                <!-- Error Message -->
+                <div id="errorMessage" style="display: none; background: rgba(255, 59, 48, 0.1); border: 1px solid rgba(255, 59, 48, 0.3); color: #ff3b30; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 14px;"></div>
+                
+                <!-- Success Message -->
+                <div id="successMessage" style="display: none; background: rgba(52, 199, 89, 0.1); border: 1px solid rgba(52, 199, 89, 0.3); color: #34c759; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 14px;"></div>
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    Sign In
+                </button>
+            </form>
+        </div>
+
+        <!-- Credentials Panel - Now positioned below the login form -->
         <div class="credentials-panel">
             <h3>Available Credentials</h3>
             <div class="credential-item">
@@ -459,40 +467,6 @@
                 <span class="username">research-head</span>
                 <span class="password">research123</span>
             </div>
-        </div>
-
-        <!-- Login Form -->
-        <div class="login-form">
-            <div class="logo">
-                <h1>Portal</h1>
-                <p>Enter the digital dimension</p>
-            </div>
-
-            <form id="loginForm">
-                <!-- Error Message -->
-                <div id="errorMessage" style="display: none; background: rgba(255, 59, 48, 0.1); border: 1px solid rgba(255, 59, 48, 0.3); color: #ff3b30; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 14px;"></div>
-                
-                <!-- Success Message -->
-                <div id="successMessage" style="display: none; background: rgba(52, 199, 89, 0.1); border: 1px solid rgba(52, 199, 89, 0.3); color: #34c759; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 14px;"></div>
-
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <div class="input-wrapper">
-                        <input type="text" id="username" name="username" placeholder="Enter your username" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <div class="input-wrapper">
-                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                    </div>
-                </div>
-
-                <button type="submit" class="login-btn">
-                    Sign In
-                </button>
-            </form>
         </div>
     </div>
 
@@ -787,258 +761,40 @@
 
         customElements.define("a-hole", AHole);
 
-        // Multi-credential login system
+        // Updated credentials system to match the displayed usernames
         const validCredentials = [
-            { email: 'admin@portal.com', password: 'admin123', role: 'admin' },
-            { email: 'user@portal.com', password: 'user123', role: 'user' },
-            { email: 'demo@portal.com', password: 'demo123', role: 'demo' },
-            { email: 'guest@portal.com', password: 'guest123', role: 'guest' },
-            { email: 'test@portal.com', password: 'test123', role: 'tester' }
+            { username: 'sridhar-sir', password: '123456', role: 'faculty' },
+            { username: 'dean', password: 'password', role: 'dean' },
+            { username: 'principal', password: 'Arjun-Rao', role: 'principal' },
+            { username: 'jeevan-sir', password: 'Jeevan', role: 'faculty' },
+            { username: 'hussain-sir', password: 'Hussain', role: 'faculty' },
+            { username: 'admin', password: 'admin123', role: 'admin' },
+            { username: 'hod-cse', password: 'cse2024', role: 'hod' },
+            { username: 'hod-ece', password: 'ece2024', role: 'hod' },
+            { username: 'hod-mech', password: 'mech2024', role: 'hod' },
+            { username: 'hod-civil', password: 'civil2024', role: 'hod' },
+            { username: 'registrar', password: 'reg123', role: 'registrar' },
+            { username: 'finance-head', password: 'finance2024', role: 'finance' },
+            { username: 'librarian', password: 'library123', role: 'librarian' },
+            { username: 'sports-coordinator', password: 'sports2024', role: 'sports' },
+            { username: 'placement-officer', password: 'placement123', role: 'placement' },
+            { username: 'student-affairs', password: 'student2024', role: 'student-affairs' },
+            { username: 'hr-head', password: 'hr123', role: 'hr' },
+            { username: 'it-support', password: 'tech2024', role: 'it-support' },
+            { username: 'lab-coordinator', password: 'lab123', role: 'lab-coordinator' },
+            { username: 'hostel-warden', password: 'hostel2024', role: 'hostel-warden' },
+            { username: 'transport-head', password: 'transport123', role: 'transport' },
+            { username: 'security-head', password: 'security2024', role: 'security' },
+            { username: 'maintenance', password: 'maintain123', role: 'maintenance' },
+            { username: 'guest-faculty', password: 'guest2024', role: 'guest-faculty' },
+            { username: 'research-head', password: 'research123', role: 'research' }
         ];
 
         // Error message display function
         function showError(message) {
-            // Remove existing error message
             const existingError = document.querySelector('.error-message');
             if (existingError) {
                 existingError.remove();
             }
 
-            // Create new error message
-            const errorDiv = document.createElement('div');
-            errorDiv.className = 'error-message';
-            errorDiv.textContent = message;
-            errorDiv.style.cssText = `
-                background: rgba(255, 59, 48, 0.1);
-                border: 1px solid rgba(255, 59, 48, 0.3);
-                color: #ff3b30;
-                padding: 12px 16px;
-                border-radius: 8px;
-                margin-bottom: 20px;
-                font-size: 14px;
-                animation: slideDown 0.3s ease;
-            `;
-
-            // Insert error message before the form
-            const form = document.getElementById('loginForm');
-            form.insertBefore(errorDiv, form.firstChild);
-
-            // Auto-remove error after 5 seconds
-            setTimeout(() => {
-                if (errorDiv.parentNode) {
-                    errorDiv.remove();
-                }
-            }, 5000);
-        }
-
-        // Navigate to dashboard page
-        function navigateToDashboard(user) {
-            // Store user data
-            sessionStorage.setItem('currentUser', JSON.stringify(user));
-            
-            // Replace current page content with dashboard
-            document.body.innerHTML = `
-                <!DOCTYPE html>
-                <html lang="en">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Portal Dashboard</title>
-                    <style>
-                        * { margin: 0; padding: 0; box-sizing: border-box; }
-                        body {
-                            font-family: 'Inter', sans-serif;
-                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                            min-height: 100vh;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            animation: fadeIn 1s ease-in-out;
-                        }
-                        @keyframes fadeIn {
-                            from { opacity: 0; }
-                            to { opacity: 1; }
-                        }
-                        .dashboard {
-                            background: rgba(255, 255, 255, 0.95);
-                            backdrop-filter: blur(20px);
-                            padding: 40px;
-                            border-radius: 20px;
-                            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-                            text-align: center;
-                            max-width: 500px;
-                            width: 90%;
-                            border: 1px solid rgba(255, 255, 255, 0.2);
-                        }
-                        .success-icon {
-                            width: 80px;
-                            height: 80px;
-                            background: linear-gradient(135deg, #a900ff, #00f8f1);
-                            border-radius: 50%;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            margin: 0 auto 20px;
-                            font-size: 40px;
-                            animation: pulse 2s infinite;
-                        }
-                        @keyframes pulse {
-                            0%, 100% { transform: scale(1); }
-                            50% { transform: scale(1.1); }
-                        }
-                        h1 { 
-                            color: #333; 
-                            margin-bottom: 10px; 
-                            font-size: 28px;
-                            font-weight: 600;
-                        }
-                        .role-badge {
-                            display: inline-block;
-                            padding: 8px 20px;
-                            background: linear-gradient(135deg, #a900ff, #00f8f1);
-                            color: white;
-                            border-radius: 25px;
-                            font-size: 14px;
-                            font-weight: 500;
-                            margin-bottom: 25px;
-                            text-transform: capitalize;
-                            letter-spacing: 0.5px;
-                        }
-                        .user-info {
-                            background: rgba(248, 249, 250, 0.8);
-                            padding: 25px;
-                            border-radius: 15px;
-                            margin-bottom: 30px;
-                            border: 1px solid rgba(0, 0, 0, 0.05);
-                        }
-                        .user-info h3 {
-                            color: #2d3748;
-                            margin-bottom: 15px;
-                            font-size: 18px;
-                        }
-                        .user-info p {
-                            margin-bottom: 8px;
-                            color: #4a5568;
-                            font-size: 14px;
-                        }
-                        .user-info strong {
-                            color: #2d3748;
-                            font-weight: 600;
-                        }
-                        .logout-btn {
-                            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
-                            color: white;
-                            padding: 15px 35px;
-                            border: none;
-                            border-radius: 30px;
-                            font-weight: 500;
-                            cursor: pointer;
-                            transition: all 0.3s ease;
-                            font-size: 16px;
-                            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-                        }
-                        .logout-btn:hover {
-                            transform: translateY(-3px);
-                            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
-                        }
-                        .logout-btn:active {
-                            transform: translateY(-1px);
-                        }
-                    </style>
-                </head>
-                <body>
-                    <div class="dashboard">
-                        <div class="success-icon">🚀</div>
-                        <h1>Welcome to Portal!</h1>
-                        <div class="role-badge">${user.role}</div>
-                        <div class="user-info">
-                            <h3>Login Successful</h3>
-                            <p><strong>Email:</strong> ${user.email}</p>
-                            <p><strong>Role:</strong> ${user.role}</p>
-                            <p><strong>Login Time:</strong> ${new Date().toLocaleString()}</p>
-                        </div>
-                        <button class="logout-btn" onclick="logout()">Logout & Return</button>
-                    </div>
-                    
-                    <script>
-                        function logout() {
-                            sessionStorage.removeItem('currentUser');
-                            location.reload();
-                        }
-                    </script>
-                </body>
-                </html>
-            `;
-        }
-
-        // Login form functionality
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value;
-            
-            // Validate inputs
-            if (!email || !password) {
-                showError('Please enter both email and password');
-                return;
-            }
-
-            // Check credentials
-            const user = validCredentials.find(cred => 
-                cred.email.toLowerCase() === email.toLowerCase() && cred.password === password
-            );
-
-            if (user) {
-                const btn = document.querySelector('.login-btn');
-                const originalText = btn.textContent;
-                
-                btn.textContent = 'Entering Portal...';
-                btn.style.background = 'linear-gradient(135deg, #00f8f1, #a900ff)';
-                btn.disabled = true;
-
-                // Navigate after 1.5 seconds
-                setTimeout(() => {
-                    navigateToDashboard(user);
-                }, 1500);
-            } else {
-                showError('Invalid email or password. Please try again.');
-                
-                // Add shake animation to form
-                const form = document.querySelector('.login-form');
-                form.style.animation = 'shake 0.5s ease-in-out';
-                setTimeout(() => {
-                    form.style.animation = '';
-                }, 500);
-            }
-        });
-
-        // Add animations CSS
-        const animationStyle = document.createElement('style');
-        animationStyle.textContent = `
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                25% { transform: translateX(-5px); }
-                75% { transform: translateX(5px); }
-            }
-            @keyframes slideDown {
-                from { opacity: 0; transform: translateY(-10px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-        `;
-        document.head.appendChild(animationStyle);
-
-        // Add some interactive effects
-        document.querySelectorAll('input').forEach(input => {
-            input.addEventListener('focus', function() {
-                this.parentElement.style.transform = 'scale(1.02)';
-                this.parentElement.style.transition = 'transform 0.2s ease';
-            });
-            
-            input.addEventListener('blur', function() {
-                this.parentElement.style.transform = 'scale(1)';
-            });
-        });
-    </script>
-</body>
-</html>
+            const errorDiv = document.createElement('div
