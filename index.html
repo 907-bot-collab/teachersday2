@@ -7,7 +7,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/easing-utils/0.0.7/easing-utils.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -101,7 +100,7 @@
             height: 100%;
         }
 
-        /* Login form container - now single column layout */
+        /* Login form container */
         .login-container {
             position: absolute;
             top: 50%;
@@ -127,6 +126,7 @@
                 0 0 100px rgba(169, 0, 255, 0.1);
             animation: formGlow 3s ease-in-out infinite alternate;
             width: 100%;
+            transition: all 0.3s ease;
         }
 
         @keyframes formGlow {
@@ -218,7 +218,36 @@
             transform: translateY(0);
         }
 
-        /* Credentials panel - now positioned below the form */
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Loading spinner */
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .btn-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Credentials panel */
         .credentials-panel {
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(15px);
@@ -269,6 +298,34 @@
             font-size: 11px;
             font-family: 'Martian Mono', monospace;
             margin-top: 2px;
+        }
+
+        /* Message styles */
+        .message {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .message.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .error-message {
+            background: rgba(255, 59, 48, 0.1);
+            border: 1px solid rgba(255, 59, 48, 0.3);
+            color: #ff3b30;
+        }
+
+        .success-message {
+            background: rgba(52, 199, 89, 0.1);
+            border: 1px solid rgba(52, 199, 89, 0.3);
+            color: #34c759;
         }
 
         /* Scrollbar styling */
@@ -322,6 +379,17 @@
         .shake-form {
             animation: shake 0.5s ease-in-out;
         }
+
+        /* Success animation */
+        @keyframes successPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .success-form {
+            animation: successPulse 0.6s ease-in-out;
+        }
     </style>
 </head>
 <body>
@@ -343,10 +411,10 @@
 
             <form id="loginForm">
                 <!-- Error Message -->
-                <div id="errorMessage" style="display: none; background: rgba(255, 59, 48, 0.1); border: 1px solid rgba(255, 59, 48, 0.3); color: #ff3b30; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 14px;"></div>
+                <div id="errorMessage" class="message error-message"></div>
                 
                 <!-- Success Message -->
-                <div id="successMessage" style="display: none; background: rgba(52, 199, 89, 0.1); border: 1px solid rgba(52, 199, 89, 0.3); color: #34c759; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 14px;"></div>
+                <div id="successMessage" class="message success-message"></div>
 
                 <div class="form-group">
                     <label for="username">Username</label>
@@ -362,34 +430,29 @@
                     </div>
                 </div>
 
-                <button type="submit" class="login-btn">
-                    Sign In
+                <button type="submit" class="login-btn" id="loginBtn">
+                    <div class="btn-content">
+                        <div class="spinner" id="spinner"></div>
+                        <span id="btnText">Sign In</span>
+                    </div>
                 </button>
             </form>
         </div>
 
-        <!-- Credentials Panel - Now positioned below the login form -->
+        <!-- Credentials Panel -->
         <div class="credentials-panel">
             <h3>Available Credentials</h3>
-            <div class="credential-item" onclick="fillCredentials('sridhar-sir', '123456')">
-                <span class="username">sridhar-sir</span>
-                <span class="password">123456</span>
+            <div class="credential-item" onclick="fillCredentials('venkatmahesh', '7893450469')">
+                <span class="username">venkatmahesh</span>
+                <span class="password">7893450469</span>
             </div>
-            <div class="credential-item" onclick="fillCredentials('dean', 'password')">
-                <span class="username">dean</span>
-                <span class="password">password</span>
+            <div class="credential-item" onclick="fillCredentials('ayeshabegum', '6300784379')">
+                <span class="username">ayeshabegum</span>
+                <span class="password">6300784379</span>
             </div>
-            <div class="credential-item" onclick="fillCredentials('principal', 'Arjun-Rao')">
-                <span class="username">principal</span>
-                <span class="password">Arjun-Rao</span>
-            </div>
-            <div class="credential-item" onclick="fillCredentials('jeevan-sir', 'Jeevan')">
-                <span class="username">jeevan-sir</span>
-                <span class="password">Jeevan</span>
-            </div>
-            <div class="credential-item" onclick="fillCredentials('hussain-sir', 'Hussain')">
-                <span class="username">hussain-sir</span>
-                <span class="password">Hussain</span>
+            <div class="credential-item" onclick="fillCredentials('ramya', '7730086437')">
+                <span class="username">ramya</span>
+                <span class="password">7730086437</span>
             </div>
             <div class="credential-item" onclick="fillCredentials('admin', 'admin123')">
                 <span class="username">admin</span>
@@ -399,77 +462,9 @@
                 <span class="username">hod-cse</span>
                 <span class="password">cse2024</span>
             </div>
-            <div class="credential-item" onclick="fillCredentials('hod-ece', 'ece2024')">
-                <span class="username">hod-ece</span>
-                <span class="password">ece2024</span>
-            </div>
-            <div class="credential-item" onclick="fillCredentials('hod-mech', 'mech2024')">
-                <span class="username">hod-mech</span>
-                <span class="password">mech2024</span>
-            </div>
-            <div class="credential-item" onclick="fillCredentials('hod-civil', 'civil2024')">
-                <span class="username">hod-civil</span>
-                <span class="password">civil2024</span>
-            </div>
             <div class="credential-item" onclick="fillCredentials('registrar', 'reg123')">
                 <span class="username">registrar</span>
                 <span class="password">reg123</span>
-            </div>
-            <div class="credential-item" onclick="fillCredentials('finance-head', 'finance2024')">
-                <span class="username">finance-head</span>
-                <span class="password">finance2024</span>
-            </div>
-            <div class="credential-item" onclick="fillCredentials('librarian', 'library123')">
-                <span class="username">librarian</span>
-                <span class="password">library123</span>
-            </div>
-            <div class="credential-item" onclick="fillCredentials('sports-coordinator', 'sports2024')">
-                <span class="username">sports-coordinator</span>
-                <span class="password">sports2024</span>
-            </div>
-            <div class="credential-item" onclick="fillCredentials('placement-officer', 'placement123')">
-                <span class="username">placement-officer</span>
-                <span class="password">placement123</span>
-            </div>
-            <div class="credential-item" onclick="fillCredentials('student-affairs', 'student2024')">
-                <span class="username">student-affairs</span>
-                <span class="password">student2024</span>
-            </div>
-            <div class="credential-item" onclick="fillCredentials('hr-head', 'hr123')">
-                <span class="username">hr-head</span>
-                <span class="password">hr123</span>
-            </div>
-            <div class="credential-item" onclick="fillCredentials('it-support', 'tech2024')">
-                <span class="username">it-support</span>
-                <span class="password">tech2024</span>
-            </div>
-            <div class="credential-item" onclick="fillCredentials('lab-coordinator', 'lab123')">
-                <span class="username">lab-coordinator</span>
-                <span class="password">lab123</span>
-            </div>
-            <div class="credential-item" onclick="fillCredentials('hostel-warden', 'hostel2024')">
-                <span class="username">hostel-warden</span>
-                <span class="password">hostel2024</span>
-            </div>
-            <div class="credential-item" onclick="fillCredentials('transport-head', 'transport123')">
-                <span class="username">transport-head</span>
-                <span class="password">transport123</span>
-            </div>
-            <div class="credential-item" onclick="fillCredentials('security-head', 'security2024')">
-                <span class="username">security-head</span>
-                <span class="password">security2024</span>
-            </div>
-            <div class="credential-item" onclick="fillCredentials('maintenance', 'maintain123')">
-                <span class="username">maintenance</span>
-                <span class="password">maintain123</span>
-            </div>
-            <div class="credential-item" onclick="fillCredentials('guest-faculty', 'guest2024')">
-                <span class="username">guest-faculty</span>
-                <span class="password">guest2024</span>
-            </div>
-            <div class="credential-item" onclick="fillCredentials('research-head', 'research123')">
-                <span class="username">research-head</span>
-                <span class="password">research123</span>
             </div>
         </div>
     </div>
@@ -765,251 +760,212 @@
 
         customElements.define("a-hole", AHole);
 
-        // Function to fill credentials when clicked
-        function fillCredentials(username, password) {
-            document.getElementById('username').value = username;
-            document.getElementById('password').value = password;
-            
-            // Add a slight focus effect
-            document.getElementById('username').focus();
-            setTimeout(() => {
-                document.getElementById('password').focus();
-            }, 100);
-        }
+        // Login System
+        class LoginSystem {
+            constructor() {
+                this.users = {
+                    'venkatmahesh': {
+                        password: '7893450469',
+                        redirectPage: 'mahesh.html',
+                        displayName: 'Dr. A Venkat Mahesh'
+                    },
+                    'ayeshabegum': {
+                        password: '6300784379',
+                        redirectPage: 'ayesha.html',
+                        displayName: 'Ms. Abdul Ayesha Begum'
+                    },
+                    'ramya': {
+                        password: '7730086437',
+                        redirectPage: 'Ramya.html',
+                        displayName: 'Ms. GBS Ramya'
+                    },
+                    'admin': {
+                        password: 'admin123',
+                        redirectPage: 'admin-dashboard.html',
+                        displayName: 'Administrator'
+                    },
+                    'hod-cse': {
+                        password: 'cse2024',
+                        redirectPage: 'hod-cse-dashboard.html',
+                        displayName: 'HOD - Computer Science'
+                    },
+                    'registrar': {
+                        password: 'reg123',
+                        redirectPage: 'registrar-dashboard.html',
+                        displayName: 'Registrar'
+                    }
+                };
 
-        // Complete login authentication system
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const errorMessage = document.getElementById('errorMessage');
-            const successMessage = document.getElementById('successMessage');
-            const loginForm = document.querySelector('.login-form');
-            
-            // Clear previous messages
-            errorMessage.style.display = 'none';
-            successMessage.style.display = 'none';
-            loginForm.classList.remove('shake-form');
-            
-            // Define all user credentials and their respective redirect pages
-            const users = {
-                'venkatmahesh': {
-                    password: '7893450469',
-                    redirectPage: 'mahesh.html',
-                    displayName: 'Dr.A Venkat Mahesh'
-                },
-                'ayeshabegum': {
-                    password: '6300784379',
-                    redirectPage: 'ayesha.html',
-                    displayName: 'Ms.Abdul Ayesha Begum'
-                },
-                'ramya': {
-                    password: '7730086437',
-                    redirectPage: 'Ramya.html',
-                    displayName: 'Ms.GBS.Ramya'
-                },
-                'je': {
-                    password: 'Jeevan',
-                    redirectPage: 'jeevan-sir.html',
-                    displayName: 'Jeevan Sir'
-                },
-                'hussain-sir': {
-                    password: 'Hussain',
-                    redirectPage: 'hussain-sir.html',
-                    displayName: 'Hussain Sir'
-                },
-                'admin': {
-                    password: 'admin123',
-                    redirectPage: 'admin-dashboard.html',
-                    displayName: 'Administrator'
-                },
-                'hod-cse': {
-                    password: 'cse2024',
-                    redirectPage: 'hod-cse-dashboard.html',
-                    displayName: 'HOD - Computer Science'
-                },
-                'hod-ece': {
-                    password: 'ece2024',
-                    redirectPage: 'hod-ece-dashboard.html',
-                    displayName: 'HOD - Electronics'
-                },
-                'hod-mech': {
-                    password: 'mech2024',
-                    redirectPage: 'hod-mech-dashboard.html',
-                    displayName: 'HOD - Mechanical'
-                },
-                'hod-civil': {
-                    password: 'civil2024',
-                    redirectPage: 'hod-civil-dashboard.html',
-                    displayName: 'HOD - Civil'
-                },
-                'registrar': {
-                    password: 'reg123',
-                    redirectPage: 'registrar-dashboard.html',
-                    displayName: 'Registrar'
-                },
-                'finance-head': {
-                    password: 'finance2024',
-                    redirectPage: 'finance-dashboard.html',
-                    displayName: 'Finance Head'
-                },
-                'librarian': {
-                    password: 'library123',
-                    redirectPage: 'library-dashboard.html',
-                    displayName: 'Librarian'
-                },
-                'sports-coordinator': {
-                    password: 'sports2024',
-                    redirectPage: 'sports-dashboard.html',
-                    displayName: 'Sports Coordinator'
-                },
-                'placement-officer': {
-                    password: 'placement123',
-                    redirectPage: 'placement-dashboard.html',
-                    displayName: 'Placement Officer'
-                },
-                'student-affairs': {
-                    password: 'student2024',
-                    redirectPage: 'student-affairs-dashboard.html',
-                    displayName: 'Student Affairs'
-                },
-                'hr-head': {
-                    password: 'hr123',
-                    redirectPage: 'hr-dashboard.html',
-                    displayName: 'HR Head'
-                },
-                'it-support': {
-                    password: 'tech2024',
-                    redirectPage: 'it-support-dashboard.html',
-                    displayName: 'IT Support'
-                },
-                'lab-coordinator': {
-                    password: 'lab123',
-                    redirectPage: 'lab-coordinator-dashboard.html',
-                    displayName: 'Lab Coordinator'
-                },
-                'hostel-warden': {
-                    password: 'hostel2024',
-                    redirectPage: 'hostel-warden-dashboard.html',
-                    displayName: 'Hostel Warden'
-                },
-                'transport-head': {
-                    password: 'transport123',
-                    redirectPage: 'transport-dashboard.html',
-                    displayName: 'Transport Head'
-                },
-                'security-head': {
-                    password: 'security2024',
-                    redirectPage: 'security-dashboard.html',
-                    displayName: 'Security Head'
-                },
-                'maintenance': {
-                    password: 'maintain123',
-                    redirectPage: 'maintenance-dashboard.html',
-                    displayName: 'Maintenance'
-                },
-                'guest-faculty': {
-                    password: 'guest2024',
-                    redirectPage: 'guest-faculty-dashboard.html',
-                    displayName: 'Guest Faculty'
-                },
-                'research-head': {
-                    password: 'research123',
-                    redirectPage: 'research-dashboard.html',
-                    displayName: 'Research Head'
+                this.elements = {
+                    form: document.getElementById('loginForm'),
+                    username: document.getElementById('username'),
+                    password: document.getElementById('password'),
+                    loginBtn: document.getElementById('loginBtn'),
+                    btnText: document.getElementById('btnText'),
+                    spinner: document.getElementById('spinner'),
+                    errorMessage: document.getElementById('errorMessage'),
+                    successMessage: document.getElementById('successMessage'),
+                    loginForm: document.querySelector('.login-form')
+                };
+
+                this.init();
+            }
+
+            init() {
+                this.elements.form.addEventListener('submit', this.handleLogin.bind(this));
+                this.elements.username.addEventListener('input', this.clearMessages.bind(this));
+                this.elements.password.addEventListener('input', this.clearMessages.bind(this));
+                
+                // Enter key support
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && (e.target === this.elements.username || e.target === this.elements.password)) {
+                        this.handleLogin(e);
+                    }
+                });
+            }
+
+            showMessage(element, message, isError = false) {
+                this.clearMessages();
+                element.innerHTML = message;
+                element.classList.add('show');
+            }
+
+            clearMessages() {
+                this.elements.errorMessage.classList.remove('show');
+                this.elements.successMessage.classList.remove('show');
+            }
+
+            setLoadingState(isLoading) {
+                this.elements.loginBtn.disabled = isLoading;
+                this.elements.spinner.style.display = isLoading ? 'block' : 'none';
+                this.elements.btnText.textContent = isLoading ? 'Signing In...' : 'Sign In';
+            }
+
+            validateCredentials(username, password) {
+                return this.users[username] && this.users[username].password === password;
+            }
+
+            handleLogin(e) {
+                e.preventDefault();
+                
+                const username = this.elements.username.value.trim();
+                const password = this.elements.password.value;
+
+                if (!username || !password) {
+                    this.showError('Please enter both username and password.');
+                    return;
                 }
-            };
-            
-            // Validate credentials
-            if (users[username] && users[username].password === password) {
-                // Show success message with personalized greeting
-                successMessage.style.display = 'block';
-                successMessage.innerHTML = `
+
+                this.setLoadingState(true);
+                this.clearMessages();
+
+                // Simulate network delay for better UX
+                setTimeout(() => {
+                    if (this.validateCredentials(username, password)) {
+                        this.handleSuccessfulLogin(username);
+                    } else {
+                        this.handleFailedLogin();
+                    }
+                }, 1000);
+            }
+
+            handleSuccessfulLogin(username) {
+                const user = this.users[username];
+                
+                this.setLoadingState(false);
+                this.elements.loginForm.classList.add('success-form');
+                
+                this.showMessage(this.elements.successMessage, `
                     <strong>Login Successful!</strong><br>
-                    Welcome ${users[username].displayName}!<br>
+                    Welcome ${user.displayName}!<br>
                     <small>Redirecting to your dashboard...</small>
-                `;
+                `);
                 
-                // Add success animation
-                loginForm.style.transform = 'scale(1.02)';
-                loginForm.style.transition = 'all 0.3s ease';
+                // Redirect after 2 seconds
+                setTimeout(() => {
+                    this.redirectToPage(user.redirectPage);
+                }, 2000);
+            }
+
+            handleFailedLogin() {
+                this.setLoadingState(false);
+                this.elements.loginForm.classList.add('shake-form');
                 
-                // Redirect to user-specific page after 2.5 seconds
-                setTimeout(function() {
-                    // For demonstration purposes, we'll show an alert since the actual pages don't exist
-                    // In a real implementation, you would uncomment the line below:
-                    // window.location.href = users[username].redirectPage;
-                    
-                    // For demo - show alert instead of redirecting
-                    alert(`Redirecting to: ${users[username].redirectPage}\n\nWelcome ${users[username].displayName}!`);
-                    
-                    // Reset form for demo
-                    document.getElementById('loginForm').reset();
-                    successMessage.style.display = 'none';
-                    loginForm.style.transform = 'scale(1)';
-                }, 2500);
-                
-            } else {
-                // Show error message with shake animation
-                errorMessage.style.display = 'block';
-                errorMessage.innerHTML = `
+                this.showMessage(this.elements.errorMessage, `
                     <strong>Login Failed!</strong><br>
                     Invalid username or password. Please try again.
-                `;
+                `);
                 
-                // Add shake animation to form
-                loginForm.classList.add('shake-form');
-                
-                // Clear form fields after error
-                setTimeout(function() {
-                    document.getElementById('password').value = '';
-                    document.getElementById('username').focus();
+                // Clear password field
+                setTimeout(() => {
+                    this.elements.password.value = '';
+                    this.elements.username.focus();
                 }, 500);
                 
                 // Remove shake animation
-                setTimeout(function() {
-                    loginForm.classList.remove('shake-form');
+                setTimeout(() => {
+                    this.elements.loginForm.classList.remove('shake-form');
                 }, 600);
             }
-        });
 
-        // Additional feature: Enter key support
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && (e.target.id === 'username' || e.target.id === 'password')) {
-                document.getElementById('loginForm').dispatchEvent(new Event('submit'));
+            showError(message) {
+                this.elements.loginForm.classList.add('shake-form');
+                this.showMessage(this.elements.errorMessage, `<strong>Error!</strong><br>${message}`);
+                
+                setTimeout(() => {
+                    this.elements.loginForm.classList.remove('shake-form');
+                }, 600);
             }
-        });
 
-        // Additional feature: Clear messages when user starts typing
-        document.getElementById('username').addEventListener('input', clearMessages);
-        document.getElementById('password').addEventListener('input', clearMessages);
-
-        function clearMessages() {
-            const errorMessage = document.getElementById('errorMessage');
-            const successMessage = document.getElementById('successMessage');
-            
-            if (errorMessage.style.display !== 'none') {
-                errorMessage.style.display = 'none';
-            }
-            if (successMessage.style.display !== 'none') {
-                successMessage.style.display = 'none';
+            redirectToPage(page) {
+                try {
+                    window.location.href = page;
+                } catch (error) {
+                    console.error('Redirect failed:', error);
+                    // Fallback: Try window.location.assign
+                    try {
+                        window.location.assign(page);
+                    } catch (assignError) {
+                        console.error('Assign redirect failed:', assignError);
+                        // Ultimate fallback: replace current page
+                        window.location.replace(page);
+                    }
+                }
             }
         }
 
-        // Optional: Add some keyboard shortcuts for demo purposes
-        document.addEventListener('keydown', function(e) {
-            // Ctrl + 1 to fill first credential (sridhar-sir)
+        // Credential filling function
+        function fillCredentials(username, password) {
+            const usernameField = document.getElementById('username');
+            const passwordField = document.getElementById('password');
+            
+            usernameField.value = username;
+            passwordField.value = password;
+            
+            // Add visual feedback
+            usernameField.style.transform = 'scale(1.02)';
+            passwordField.style.transform = 'scale(1.02)';
+            
+            setTimeout(() => {
+                usernameField.style.transform = 'scale(1)';
+                passwordField.style.transform = 'scale(1)';
+                passwordField.focus();
+            }, 200);
+        }
+
+        // Initialize login system when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new LoginSystem();
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
             if (e.ctrlKey && e.key === '1') {
                 e.preventDefault();
-                fillCredentials('sridhar-sir', '123456');
+                fillCredentials('venkatmahesh', '7893450469');
             }
-            // Ctrl + 2 to fill admin credential
             if (e.ctrlKey && e.key === '2') {
                 e.preventDefault();
                 fillCredentials('admin', 'admin123');
             }
         });
-    </script>
-</body>
-</html>
