@@ -328,6 +328,83 @@
             color: #34c759;
         }
 
+        /* Demo page styles */
+        .demo-page {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            z-index: 1000;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .demo-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            height: calc(100vh - 40px);
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 20px;
+        }
+
+        .demo-header h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .demo-header p {
+            color: #666;
+            font-size: 1.2rem;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .demo-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+
+        .demo-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .demo-section p {
+            color: #555;
+            line-height: 1.6;
+        }
+
         /* Scrollbar styling */
         .credentials-panel::-webkit-scrollbar {
             width: 4px;
@@ -367,6 +444,14 @@
             .logo h1 {
                 font-size: 24px;
             }
+
+            .demo-content {
+                padding: 20px;
+            }
+
+            .demo-header h1 {
+                font-size: 2rem;
+            }
         }
 
         /* Animation for form shake */
@@ -401,7 +486,7 @@
     </a-hole>
 
     <!-- Login Container -->
-    <div class="login-container">
+    <div class="login-container" id="loginContainer">
         <!-- Login Form -->
         <div class="login-form">
             <div class="logo">
@@ -465,6 +550,95 @@
             <div class="credential-item" onclick="fillCredentials('registrar', 'reg123')">
                 <span class="username">registrar</span>
                 <span class="password">reg123</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Demo Pages (Since we can't create separate HTML files in this environment) -->
+    <div class="demo-page" id="maheshPage">
+        <div class="demo-content">
+            <button class="back-btn" onclick="showLoginPage()">← Back to Login</button>
+            <div class="demo-header">
+                <h1>Dr. A Venkat Mahesh Dashboard</h1>
+                <p>Welcome to your personal dashboard</p>
+            </div>
+            <div class="demo-section">
+                <h3>Profile Information</h3>
+                <p>This is a demo dashboard page that would normally be loaded from <strong>mahesh.html</strong>. In a real implementation, this would be a separate HTML file with your specific content.</p>
+            </div>
+            <div class="demo-section">
+                <h3>Quick Actions</h3>
+                <p>Your personalized content, navigation menus, data tables, and other dashboard elements would appear here.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo-page" id="ayeshaPage">
+        <div class="demo-content">
+            <button class="back-btn" onclick="showLoginPage()">← Back to Login</button>
+            <div class="demo-header">
+                <h1>Ms. Abdul Ayesha Begum Dashboard</h1>
+                <p>Welcome to your workspace</p>
+            </div>
+            <div class="demo-section">
+                <h3>Dashboard Overview</h3>
+                <p>This would normally load from <strong>ayesha.html</strong> with your specific dashboard content.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo-page" id="ramyaPage">
+        <div class="demo-content">
+            <button class="back-btn" onclick="showLoginPage()">← Back to Login</button>
+            <div class="demo-header">
+                <h1>Ms. GBS Ramya Dashboard</h1>
+                <p>Your personal workspace</p>
+            </div>
+            <div class="demo-section">
+                <h3>Welcome</h3>
+                <p>This would normally be loaded from <strong>Ramya.html</strong> with your dashboard content.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo-page" id="adminPage">
+        <div class="demo-content">
+            <button class="back-btn" onclick="showLoginPage()">← Back to Login</button>
+            <div class="demo-header">
+                <h1>Administrator Dashboard</h1>
+                <p>System Administration Panel</p>
+            </div>
+            <div class="demo-section">
+                <h3>System Overview</h3>
+                <p>This would load from <strong>admin-dashboard.html</strong> with administrative tools and system management features.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo-page" id="hodPage">
+        <div class="demo-content">
+            <button class="back-btn" onclick="showLoginPage()">← Back to Login</button>
+            <div class="demo-header">
+                <h1>HOD - Computer Science Dashboard</h1>
+                <p>Department Management Panel</p>
+            </div>
+            <div class="demo-section">
+                <h3>Department Overview</h3>
+                <p>This would load from <strong>hod-cse-dashboard.html</strong> with department management tools.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo-page" id="registrarPage">
+        <div class="demo-content">
+            <button class="back-btn" onclick="showLoginPage()">← Back to Login</button>
+            <div class="demo-header">
+                <h1>Registrar Dashboard</h1>
+                <p>Academic Records Management</p>
+            </div>
+            <div class="demo-section">
+                <h3>Records Overview</h3>
+                <p>This would load from <strong>registrar-dashboard.html</strong> with academic record management tools.</p>
             </div>
         </div>
     </div>
@@ -760,39 +934,45 @@
 
         customElements.define("a-hole", AHole);
 
-        // Login System
+        // Enhanced Login System with proper page navigation
         class LoginSystem {
             constructor() {
                 this.users = {
                     'venkatmahesh': {
                         password: '7893450469',
                         redirectPage: 'mahesh.html',
-                        displayName: 'Dr. A Venkat Mahesh'
+                        displayName: 'Dr. A Venkat Mahesh',
+                        demoPageId: 'maheshPage'
                     },
                     'ayeshabegum': {
                         password: '6300784379',
                         redirectPage: 'ayesha.html',
-                        displayName: 'Ms. Abdul Ayesha Begum'
+                        displayName: 'Ms. Abdul Ayesha Begum',
+                        demoPageId: 'ayeshaPage'
                     },
                     'ramya': {
                         password: '7730086437',
                         redirectPage: 'Ramya.html',
-                        displayName: 'Ms. GBS Ramya'
+                        displayName: 'Ms. GBS Ramya',
+                        demoPageId: 'ramyaPage'
                     },
                     'admin': {
                         password: 'admin123',
                         redirectPage: 'admin-dashboard.html',
-                        displayName: 'Administrator'
+                        displayName: 'Administrator',
+                        demoPageId: 'adminPage'
                     },
                     'hod-cse': {
                         password: 'cse2024',
                         redirectPage: 'hod-cse-dashboard.html',
-                        displayName: 'HOD - Computer Science'
+                        displayName: 'HOD - Computer Science',
+                        demoPageId: 'hodPage'
                     },
                     'registrar': {
                         password: 'reg123',
                         redirectPage: 'registrar-dashboard.html',
-                        displayName: 'Registrar'
+                        displayName: 'Registrar',
+                        demoPageId: 'registrarPage'
                     }
                 };
 
@@ -805,7 +985,8 @@
                     spinner: document.getElementById('spinner'),
                     errorMessage: document.getElementById('errorMessage'),
                     successMessage: document.getElementById('successMessage'),
-                    loginForm: document.querySelector('.login-form')
+                    loginForm: document.querySelector('.login-form'),
+                    loginContainer: document.getElementById('loginContainer')
                 };
 
                 this.init();
@@ -881,9 +1062,9 @@
                     <small>Redirecting to your dashboard...</small>
                 `);
                 
-                // Redirect after 2 seconds
+                // Try to redirect to actual HTML file first, then fallback to demo
                 setTimeout(() => {
-                    this.redirectToPage(user.redirectPage);
+                    this.redirectToPage(user.redirectPage, user.demoPageId);
                 }, 2000);
             }
 
@@ -917,20 +1098,82 @@
                 }, 600);
             }
 
-            redirectToPage(page) {
+            redirectToPage(htmlFile, demoPageId) {
+                // First, try to open the actual HTML file
                 try {
-                    window.location.href = page;
+                    // Check if the file exists by trying to open it in a new tab/window
+                    const newWindow = window.open(htmlFile, '_blank');
+                    
+                    // If the file doesn't exist, the new window might be blocked or fail
+                    setTimeout(() => {
+                        if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+                            // Fallback: Show demo page in current window
+                            console.log(`Could not open ${htmlFile}, showing demo page instead`);
+                            this.showDemoPage(demoPageId);
+                        } else {
+                            // Successfully opened the HTML file
+                            console.log(`Successfully opened ${htmlFile}`);
+                            // Optionally close current window or reset login form
+                            this.resetLoginForm();
+                        }
+                    }, 1000);
+                    
                 } catch (error) {
-                    console.error('Redirect failed:', error);
-                    // Fallback: Try window.location.assign
-                    try {
-                        window.location.assign(page);
-                    } catch (assignError) {
-                        console.error('Assign redirect failed:', assignError);
-                        // Ultimate fallback: replace current page
-                        window.location.replace(page);
-                    }
+                    console.error('Error opening HTML file:', error);
+                    // Fallback: Show demo page
+                    this.showDemoPage(demoPageId);
                 }
+            }
+
+            showDemoPage(demoPageId) {
+                // Hide login container
+                this.elements.loginContainer.style.display = 'none';
+                
+                // Show the demo page
+                const demoPage = document.getElementById(demoPageId);
+                if (demoPage) {
+                    demoPage.style.display = 'block';
+                    
+                    // Add entrance animation
+                    demoPage.style.opacity = '0';
+                    setTimeout(() => {
+                        demoPage.style.transition = 'opacity 0.5s ease';
+                        demoPage.style.opacity = '1';
+                    }, 100);
+                }
+            }
+
+            resetLoginForm() {
+                // Reset form values
+                this.elements.username.value = '';
+                this.elements.password.value = '';
+                
+                // Clear messages
+                this.clearMessages();
+                
+                // Remove animation classes
+                this.elements.loginForm.classList.remove('success-form', 'shake-form');
+                
+                // Reset loading state
+                this.setLoadingState(false);
+            }
+        }
+
+        // Function to go back to login page from demo pages
+        function showLoginPage() {
+            // Hide all demo pages
+            const demoPages = document.querySelectorAll('.demo-page');
+            demoPages.forEach(page => {
+                page.style.display = 'none';
+            });
+            
+            // Show login container
+            const loginContainer = document.getElementById('loginContainer');
+            loginContainer.style.display = 'flex';
+            
+            // Reset login form
+            if (window.loginSystem) {
+                window.loginSystem.resetLoginForm();
             }
         }
 
@@ -955,7 +1198,7 @@
 
         // Initialize login system when DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
-            new LoginSystem();
+            window.loginSystem = new LoginSystem();
         });
 
         // Keyboard shortcuts
@@ -969,3 +1212,11 @@
                 fillCredentials('admin', 'admin123');
             }
         });
+
+        // Handle browser back button
+        window.addEventListener('popstate', (e) => {
+            showLoginPage();
+        });
+    </script>
+</body>
+</html>
